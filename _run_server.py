@@ -9,8 +9,10 @@ from flask import Flask, request, jsonify, send_from_directory, session
 # ============================================================
 # DOCTOR LOGIN CREDENTIALS (change these!)
 # ============================================================
-DOCTOR_USERNAME = 'admin'
-DOCTOR_PASSWORD = 'cardio123'  # Change this to your own password
+import os
+
+DOCTOR_USERNAME = os.environ.get('DOCTOR_USERNAME', 'admin')
+DOCTOR_PASSWORD = os.environ.get('DOCTOR_PASSWORD', 'changeme')
 # ============================================================
 
 # --- Load Model ---
