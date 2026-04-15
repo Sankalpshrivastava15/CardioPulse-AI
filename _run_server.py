@@ -1,3 +1,4 @@
+import os
 import pickle
 import sqlite3
 import hashlib
@@ -9,7 +10,6 @@ from flask import Flask, request, jsonify, send_from_directory, session
 # ============================================================
 # DOCTOR LOGIN CREDENTIALS (change these!)
 # ============================================================
-import os
 
 DOCTOR_USERNAME = os.environ.get('DOCTOR_USERNAME', 'admin')
 DOCTOR_PASSWORD = os.environ.get('DOCTOR_PASSWORD', 'changeme')
