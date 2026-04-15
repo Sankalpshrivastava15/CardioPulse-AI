@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="CardioPulse AI - Advanced heart disease risk prediction powered by machine learning. Enter your clinical measurements for an instant cardiovascular risk assessment." />
+  <title>CardioPulse AI · Heart Disease Risk Predictor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Animated Background -->
+  <div class="bg-mesh"></div>
+  <div class="bg-blob blob-1"></div>
+  <div class="bg-blob blob-2"></div>
+  <div class="bg-blob blob-3"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <span class="brand-icon">♥</span>
+        <span class="brand-text">CardioPulse AI</span>
+      </div>
+      <div class="nav-links">
+        <a href="#hero" class="nav-link active">Dashboard</a>
+        <a href="#patient-history-section" class="nav-link">Patient History</a>
+        <a href="#risk-factors-section" class="nav-link">Risk Factors</a>
+        <a href="#guidelines-section" class="nav-link">Guidelines</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn-emergency" id="btn-emergency">
+          <span class="material-symbols-outlined">emergency</span>
+          Emergency
+        </button>
+        <div class="nav-icon-btn">
+          <span class="material-symbols-outlined">notifications</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <!-- Hero Section -->
+    <header class="hero" id="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="material-symbols-outlined">verified</span>
+          AI-Powered Clinical Tool
+        </div>
+        <h1 class="hero-title">Heart Disease<br/>Risk Predictor</h1>
+        <p class="hero-subtitle">
+          Harness advanced machine learning analytics to estimate cardiovascular 
+          risk profiles through precise physiological data mapping.
+        </p>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-value">93%</span>
+            <span class="hero-stat-label">ROC-AUC Score</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">920+</span>
+            <span class="hero-stat-label">Training Samples</span>
+          </div>
+          <div class="hero-stat-divider"></div>
+          <div class="hero-stat">
+            <span class="hero-stat-value">13</span>
+            <span class="hero-stat-label">Clinical Features</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="pulse-ring ring-1"></div>
+        <div class="pulse-ring ring-2"></div>
+        <div class="pulse-ring ring-3"></div>
+        <span class="material-symbols-outlined hero-heart" style="font-variation-settings: 'FILL' 1;">favorite</span>
+      </div>
+    </header>
+
+    <!-- Main Grid -->
+    <div class="content-grid">
+
+      <!-- Form Section -->
+      <section class="form-section" id="predictor-card">
+        <div class="section-header">
+          <div class="section-title-group">
+            <span class="section-accent"></span>
+            <h2 class="section-title">Biometric Parameters</h2>
+          </div>
+          <span class="section-tag">v2.0 Engine</span>
+        </div>
+
+        <form id="predict-form" autocomplete="off" novalidate>
+          <!-- Row 0: Patient Info -->
+          <div class="patient-info-banner">
+            <span class="material-symbols-outlined">badge</span>
+            <span>Patient Information</span>
+          </div>
+          <div class="form-row cols-2">
+            <div class="field">
+              <label for="patient_name">Patient Full Name</label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">person</span>
+                <input type="text" id="patient_name" name="patient_name" placeholder="e.g. John Doe" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="patient_phone">Contact Number <span class="unit">optional</span></label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">call</span>
+                <input type="tel" id="patient_phone" name="patient_phone" placeholder="e.g. +91 98765 43210" />
+              </div>
+            </div>
+          </div>
+
+          <div class="patient-info-banner clinical-banner">
+            <span class="material-symbols-outlined">monitor_heart</span>
+            <span>Clinical Measurements</span>
+          </div>
+
+          <!-- Row 1: Age / Sex -->
+          <div class="form-row cols-2">
+            <div class="field">
+              <label for="age">Patient Age <span class="unit">years</span></label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">calendar_today</span>
+                <input type="number" id="age" name="age" placeholder="e.g. 54" min="1" max="120" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="sex">Biological Sex</label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">person</span>
+                <select id="sex" name="sex" required>
+                  <option value="">— select —</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: BP / Cholesterol -->
+          <div class="form-row cols-2">
+            <div class="field">
+              <label for="trestbps">Resting Blood Pressure <span class="unit">mm Hg</span></label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">vital_signs</span>
+                <input type="number" id="trestbps" name="trestbps" placeholder="e.g. 130" min="50" max="250" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="chol">Serum Cholesterol <span class="unit">mg/dl</span></label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">biotech</span>
+                <input type="number" id="chol" name="chol" placeholder="e.g. 245" min="100" max="600" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3: Chest Pain / Max HR -->
+          <div class="form-row cols-2">
+            <div class="field">
+              <label for="cp">Chest Pain Type</label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">ecg_heart</span>
+                <select id="cp" name="cp" required>
+                  <option value="">— select —</option>
+                  <option value="typical angina">Typical Angina</option>
+                  <option value="atypical angina">Atypical Angina</option>
+                  <option value="non-anginal">Non-Anginal Pain</option>
+                  <option value="asymptomatic">Asymptomatic</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="thalch">Max Heart Rate <span class="unit">bpm</span></label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">pulse_alert</span>
+                <input type="number" id="thalch" name="thalch" placeholder="e.g. 150" min="60" max="220" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 4: Fasting BS / Resting ECG -->
+          <div class="form-row cols-2">
+            <div class="field">
+              <label for="fbs">Fasting Blood Sugar &gt; 120 mg/dl</label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">water_drop</span>
+                <select id="fbs" name="fbs">
+                  <option value="">— select —</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="restecg">Resting ECG Results</label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">monitor_heart</span>
+                <select id="restecg" name="restecg">
+                  <option value="">— select —</option>
+                  <option value="normal">Normal</option>
+                  <option value="st-t abnormality">ST-T Wave Abnormality</option>
+                  <option value="lv hypertrophy">Left Ventricular Hypertrophy</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 5: Exercise Angina / Oldpeak -->
+          <div class="form-row cols-2">
+            <div class="field">
+              <label for="exang">Exercise-Induced Angina</label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">directions_run</span>
+                <select id="exang" name="exang">
+                  <option value="">— select —</option>
+                  <option value="1">Yes</option>
+                  <option value="0">No</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="oldpeak">ST Depression (Oldpeak)</label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">show_chart</span>
+                <input type="number" id="oldpeak" name="oldpeak" placeholder="e.g. 1.5" min="0" max="10" step="0.1" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 6: Slope / CA -->
+          <div class="form-row cols-2">
+            <div class="field">
+              <label for="slope">Slope of Peak ST Segment</label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">trending_up</span>
+                <select id="slope" name="slope">
+                  <option value="">— select —</option>
+                  <option value="upsloping">Upsloping</option>
+                  <option value="flat">Flat</option>
+                  <option value="downsloping">Downsloping</option>
+                </select>
+              </div>
+            </div>
+            <div class="field">
+              <label for="ca">Major Vessels by Fluoroscopy</label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">radiology</span>
+                <select id="ca" name="ca">
+                  <option value="">— select —</option>
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 7: Thalassemia -->
+          <div class="form-row cols-1">
+            <div class="field">
+              <label for="thal">Thalassemia</label>
+              <div class="input-wrap">
+                <span class="material-symbols-outlined input-icon">bloodtype</span>
+                <select id="thal" name="thal">
+                  <option value="">— select —</option>
+                  <option value="normal">Normal</option>
+                  <option value="fixed defect">Fixed Defect</option>
+                  <option value="reversable defect">Reversible Defect</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit -->
+          <button type="submit" class="btn-predict" id="predict-btn">
+            <span class="material-symbols-outlined btn-icon" style="font-variation-settings: 'FILL' 1;">analytics</span>
+            <span class="btn-label">Analyse Risk Profile</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <!-- Error panel -->
+        <div class="error-panel" id="error-panel" hidden>
+          <span class="material-symbols-outlined error-icon">warning</span>
+          <span id="error-msg">Something went wrong. Please try again.</span>
+        </div>
+      </section>
+
+      <!-- Results Section -->
+      <section class="result-section">
+        <!-- Initial state - waiting -->
+        <div class="result-waiting" id="result-waiting">
+          <div class="waiting-visual">
+            <span class="material-symbols-outlined waiting-icon" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+          </div>
+          <h3 class="waiting-title">Awaiting Analysis</h3>
+          <p class="waiting-text">Fill in the biometric parameters and click <strong>Analyse Risk Profile</strong> to generate your cardiovascular risk assessment.</p>
+        </div>
+
+        <!-- Result panel -->
+        <div class="result-panel" id="result-panel" aria-live="polite" hidden>
+          <div class="result-inner">
+            <!-- Gauge -->
+            <div class="gauge-wrap">
+              <svg class="gauge" viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="gauge-gradient" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#22c55e"/>
+                    <stop offset="50%" stop-color="#f59e0b"/>
+                    <stop offset="100%" stop-color="#ef4444"/>
+                  </linearGradient>
+                </defs>
+                <!-- track -->
+                <path class="gauge-track"
+                      d="M 20 100 A 80 80 0 0 1 180 100"
+                      fill="none" stroke-width="14" stroke-linecap="round"/>
+                <!-- fill -->
+                <path class="gauge-fill" id="gauge-fill"
+                      d="M 20 100 A 80 80 0 0 1 180 100"
+                      fill="none" stroke-width="14" stroke-linecap="round"
+                      stroke-dasharray="251.2" stroke-dashoffset="251.2"/>
+                <!-- needle -->
+                <line class="gauge-needle" id="gauge-needle"
+                      x1="100" y1="100" x2="100" y2="30"
+                      stroke-width="3" stroke-linecap="round"
+                      transform="rotate(-90 100 100)"/>
+                <circle cx="100" cy="100" r="6" class="gauge-hub"/>
+              </svg>
+            </div>
+
+            <div class="result-pct" id="result-pct">—</div>
+            <div class="result-label">Heart Disease Risk</div>
+            <div class="result-badge" id="result-badge"></div>
+
+            <!-- Detail cards -->
+            <div class="result-details" id="result-details">
+              <div class="detail-card">
+                <div class="detail-icon-wrap detail-icon-metabolic">
+                  <span class="material-symbols-outlined">health_metrics</span>
+                </div>
+                <div class="detail-info">
+                  <span class="detail-label">Metabolic Score</span>
+                  <span class="detail-value" id="metabolic-score">—</span>
+                </div>
+              </div>
+              <div class="detail-card">
+                <div class="detail-icon-wrap detail-icon-bp">
+                  <span class="material-symbols-outlined">vital_signs</span>
+                </div>
+                <div class="detail-info">
+                  <span class="detail-label">BP Assessment</span>
+                  <span class="detail-value" id="bp-assessment">—</span>
+                </div>
+              </div>
+            </div>
+
+            <p class="result-disclaimer">
+              This tool is for educational purposes only and does not constitute
+              medical advice. Consult a qualified healthcare professional.
+            </p>
+          </div>
+        </div>
+
+        <!-- Clinical Guidance -->
+        <div class="guidance-card">
+          <div class="guidance-icon-wrap">
+            <span class="material-symbols-outlined">info</span>
+          </div>
+          <div class="guidance-content">
+            <h4 class="guidance-title">Clinical Guidance</h4>
+            <p class="guidance-text">
+              This assessment is for preliminary clinical review. Always cross-reference 
+              with 12-lead ECG and secondary biomarker validation.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- Risk Factors Section -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section class="info-section" id="risk-factors-section">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="section-accent"></span>
+          <h2 class="section-title">Key Risk Factors</h2>
+        </div>
+        <span class="section-tag">Evidence-Based</span>
+      </div>
+
+      <div class="risk-grid">
+        <div class="risk-card">
+          <div class="risk-card-icon risk-icon-red">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+          </div>
+          <h4 class="risk-card-title">Chest Pain Type</h4>
+          <p class="risk-card-text">Asymptomatic chest pain is the strongest predictor. Patients with no apparent angina often have the highest underlying risk of coronary artery disease.</p>
+          <span class="risk-card-tag">High Impact</span>
+        </div>
+
+        <div class="risk-card">
+          <div class="risk-card-icon risk-icon-amber">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">monitor_heart</span>
+          </div>
+          <h4 class="risk-card-title">Max Heart Rate</h4>
+          <p class="risk-card-text">A lower maximum heart rate achieved during exercise testing is strongly associated with increased cardiovascular disease risk and reduced functional capacity.</p>
+          <span class="risk-card-tag">High Impact</span>
+        </div>
+
+        <div class="risk-card">
+          <div class="risk-card-icon risk-icon-teal">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bloodtype</span>
+          </div>
+          <h4 class="risk-card-title">Thalassemia</h4>
+          <p class="risk-card-text">Reversible defects in thallium stress testing indicate areas of ischemia — tissue that is alive but receiving inadequate blood supply under stress conditions.</p>
+          <span class="risk-card-tag">Moderate Impact</span>
+        </div>
+
+        <div class="risk-card">
+          <div class="risk-card-icon risk-icon-gold">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+          </div>
+          <h4 class="risk-card-title">ST Depression</h4>
+          <p class="risk-card-text">Exercise-induced ST depression (oldpeak) reflects myocardial ischemia. Values above 2.0 mm are considered significantly abnormal and warrant further investigation.</p>
+          <span class="risk-card-tag">Moderate Impact</span>
+        </div>
+
+        <div class="risk-card">
+          <div class="risk-card-icon risk-icon-blue">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+          </div>
+          <h4 class="risk-card-title">Age & Sex</h4>
+          <p class="risk-card-text">Men over 45 and women over 55 face elevated risk. Male sex is an independent risk factor, with men typically developing heart disease 10 years earlier than women.</p>
+          <span class="risk-card-tag">Baseline Factor</span>
+        </div>
+
+        <div class="risk-card">
+          <div class="risk-card-icon risk-icon-green">
+            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">radiology</span>
+          </div>
+          <h4 class="risk-card-title">Vessel Fluoroscopy</h4>
+          <p class="risk-card-text">The number of major vessels (0–3) coloured by fluoroscopy directly indicates the extent of coronary artery disease. More vessels affected signals higher severity.</p>
+          <span class="risk-card-tag">Diagnostic Marker</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- Guidelines Section -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section class="info-section" id="guidelines-section">
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="section-accent"></span>
+          <h2 class="section-title">Clinical Guidelines</h2>
+        </div>
+        <span class="section-tag">AHA / ACC Standards</span>
+      </div>
+
+      <div class="guidelines-grid">
+        <!-- Guideline 1 -->
+        <div class="guideline-item">
+          <div class="guideline-number">01</div>
+          <div class="guideline-body">
+            <h4 class="guideline-heading">
+              <span class="material-symbols-outlined">vital_signs</span>
+              Blood Pressure Management
+            </h4>
+            <ul class="guideline-points">
+              <li>Target resting BP should be below <strong>130/80 mmHg</strong> for adults at increased cardiovascular risk.</li>
+              <li>Hypertension Stage 1 (130–139/80–89 mmHg) requires lifestyle modifications and potential pharmacotherapy.</li>
+              <li>Hypertension Stage 2 (≥ 140/90 mmHg) warrants immediate dual-drug antihypertensive therapy.</li>
+              <li>Home BP monitoring is recommended for accurate assessment — clinic readings can be 5–10 mmHg higher.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Guideline 2 -->
+        <div class="guideline-item">
+          <div class="guideline-number">02</div>
+          <div class="guideline-body">
+            <h4 class="guideline-heading">
+              <span class="material-symbols-outlined">biotech</span>
+              Cholesterol & Lipid Profile
+            </h4>
+            <ul class="guideline-points">
+              <li>Desirable total cholesterol: <strong>&lt; 200 mg/dL</strong>. Borderline high: 200–239 mg/dL. High: ≥ 240 mg/dL.</li>
+              <li>LDL-C should be the primary target — optimal level is <strong>&lt; 100 mg/dL</strong> for high-risk patients.</li>
+              <li>Statin therapy recommended for patients with 10-year ASCVD risk ≥ 7.5% and LDL-C ≥ 70 mg/dL.</li>
+              <li>Fasting lipid panel should be repeated every 4–6 years for adults aged 20+ with normal levels.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Guideline 3 -->
+        <div class="guideline-item">
+          <div class="guideline-number">03</div>
+          <div class="guideline-body">
+            <h4 class="guideline-heading">
+              <span class="material-symbols-outlined">ecg_heart</span>
+              ECG Interpretation & ST Segment
+            </h4>
+            <ul class="guideline-points">
+              <li>ST depression ≥ 1 mm during exercise is considered a positive test for myocardial ischemia.</li>
+              <li>Downsloping ST depression carries the highest risk — more significant than horizontal or upsloping patterns.</li>
+              <li>Exercise stress testing should achieve ≥ <strong>85% of age-predicted maximum heart rate</strong> (220 – age).</li>
+              <li>A 12-lead ECG should be the first-line investigation for all patients presenting with chest pain.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Guideline 4 -->
+        <div class="guideline-item">
+          <div class="guideline-number">04</div>
+          <div class="guideline-body">
+            <h4 class="guideline-heading">
+              <span class="material-symbols-outlined">water_drop</span>
+              Blood Sugar & Metabolic Health
+            </h4>
+            <ul class="guideline-points">
+              <li>Fasting blood sugar &gt; <strong>120 mg/dL</strong> is a significant risk factor and may indicate pre-diabetes or diabetes.</li>
+              <li>Diabetes doubles the risk of cardiovascular disease and is considered a "coronary risk equivalent."</li>
+              <li>HbA1c target of <strong>&lt; 7%</strong> is recommended for most adults with diabetes to reduce microvascular risk.</li>
+              <li>Metabolic syndrome (≥3 of: high BP, high glucose, high triglycerides, low HDL, large waist) dramatically increases CVD risk.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Guideline 5 -->
+        <div class="guideline-item">
+          <div class="guideline-number">05</div>
+          <div class="guideline-body">
+            <h4 class="guideline-heading">
+              <span class="material-symbols-outlined">directions_run</span>
+              Exercise & Lifestyle Modifications
+            </h4>
+            <ul class="guideline-points">
+              <li>At least <strong>150 minutes/week</strong> of moderate-intensity aerobic exercise or 75 minutes of vigorous activity.</li>
+              <li>Exercise-induced angina should be evaluated with graded stress testing before clearing for physical activity.</li>
+              <li>Smoking cessation reduces CVD risk by 50% within 1 year and to near-normal levels within 5–15 years.</li>
+              <li>Mediterranean-style diet rich in fruits, vegetables, whole grains, and omega-3 fatty acids is cardioprotective.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Guideline 6 -->
+        <div class="guideline-item">
+          <div class="guideline-number">06</div>
+          <div class="guideline-body">
+            <h4 class="guideline-heading">
+              <span class="material-symbols-outlined">emergency</span>
+              When to Seek Emergency Care
+            </h4>
+            <ul class="guideline-points">
+              <li>Chest pain lasting &gt; <strong>15 minutes</strong> unrelieved by rest or nitroglycerin — call emergency services immediately.</li>
+              <li>Sudden onset of shortness of breath, cold sweat, nausea, or lightheadedness accompanying chest discomfort.</li>
+              <li>Pain radiating to left arm, jaw, neck, or back — classic signs of acute myocardial infarction.</li>
+              <li>Time is critical: achieving reperfusion within <strong>90 minutes</strong> (door-to-balloon time) significantly improves outcomes.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div class="guidelines-disclaimer">
+        <span class="material-symbols-outlined">shield</span>
+        <p>Based on <strong>AHA/ACC 2019 Guidelines</strong> for the Primary Prevention of Cardiovascular Disease. This information is for educational reference only and should not replace professional medical judgment. Always consult a qualified healthcare provider for clinical decisions.</p>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════ -->
+    <!-- Patient History Section -->
+    <!-- ═══════════════════════════════════════════════ -->
+    <section class="info-section" id="patient-history-section">
+      <!-- Lock Overlay (shown when not logged in) -->
+      <div class="lock-overlay" id="lock-overlay">
+        <div class="lock-content">
+          <span class="material-symbols-outlined lock-icon" style="font-variation-settings: 'FILL' 1;">lock</span>
+          <h3 class="lock-title">Authentication Required</h3>
+          <p class="lock-text">Patient records are protected. Only authorized personnel can access this data.</p>
+          <button class="btn-login-trigger" id="btn-login-trigger">
+            <span class="material-symbols-outlined">login</span>
+            Sign In to Access
+          </button>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <div class="section-title-group">
+          <span class="section-accent"></span>
+          <h2 class="section-title">Patient History</h2>
+        </div>
+        <div class="history-actions">
+          <div class="search-wrap">
+            <span class="material-symbols-outlined input-icon">search</span>
+            <input type="text" id="history-search" placeholder="Search by name..." />
+          </div>
+          <button class="btn-refresh" id="btn-refresh-history" title="Refresh">
+            <span class="material-symbols-outlined">refresh</span>
+          </button>
+          <button class="btn-logout" id="btn-logout" title="Sign Out" hidden>
+            <span class="material-symbols-outlined">logout</span>
+            <span class="btn-logout-label">Sign Out</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="history-stats" id="history-stats">
+        <div class="history-stat-item">
+          <span class="material-symbols-outlined">group</span>
+          <span>Total: <strong id="stat-total">0</strong></span>
+        </div>
+        <div class="history-stat-item stat-low">
+          <span class="material-symbols-outlined">check_circle</span>
+          <span>Low: <strong id="stat-low">0</strong></span>
+        </div>
+        <div class="history-stat-item stat-mod">
+          <span class="material-symbols-outlined">warning</span>
+          <span>Moderate: <strong id="stat-mod">0</strong></span>
+        </div>
+        <div class="history-stat-item stat-high">
+          <span class="material-symbols-outlined">error</span>
+          <span>High: <strong id="stat-high">0</strong></span>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="table-container">
+        <table class="history-table" id="history-table">
+          <thead>
+            <tr>
+              <th>Patient Name</th>
+              <th>Age</th>
+              <th>Sex</th>
+              <th>BP</th>
+              <th>Chol</th>
+              <th>Max HR</th>
+              <th>Risk %</th>
+              <th>Level</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="history-tbody">
+            <!-- Rows populated by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Empty State -->
+      <div class="history-empty" id="history-empty">
+        <span class="material-symbols-outlined">folder_open</span>
+        <p>No patient records yet. Run a risk analysis to create the first record.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-copy">© 2024 CardioPulse AI · Precision Clinical Systems</p>
+      <div class="footer-links">
+        <a href="#">Privacy Protocol</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Data Ethics</a>
+      </div>
+      <p class="footer-model">
+        Trained on the <strong>UCI Heart Disease</strong> dataset · Random Forest · ROC-AUC 0.93
+      </p>
+    </div>
+  </footer>
+
+  <!-- Login Modal -->
+  <div class="modal-overlay" id="login-modal" hidden>
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <div class="modal-icon-wrap">
+        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+      </div>
+      <h3 class="modal-title">Doctor Sign In</h3>
+      <p class="modal-subtitle">Enter your credentials to access patient records</p>
+      <form id="login-form" autocomplete="off">
+        <div class="modal-field">
+          <label for="login-username">Username</label>
+          <div class="input-wrap">
+            <span class="material-symbols-outlined input-icon">person</span>
+            <input type="text" id="login-username" name="username" placeholder="Enter username" required />
+          </div>
+        </div>
+        <div class="modal-field">
+          <label for="login-password">Password</label>
+          <div class="input-wrap">
+            <span class="material-symbols-outlined input-icon">key</span>
+            <input type="password" id="login-password" name="password" placeholder="Enter password" required />
+          </div>
+        </div>
+        <div class="modal-error" id="login-error" hidden>
+          <span class="material-symbols-outlined">error</span>
+          <span id="login-error-msg">Invalid credentials</span>
+        </div>
+        <button type="submit" class="btn-predict btn-login">
+          <span class="material-symbols-outlined btn-icon">login</span>
+          <span class="btn-label">Sign In</span>
+          <span class="btn-spinner" aria-hidden="true"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
